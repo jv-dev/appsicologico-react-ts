@@ -1,0 +1,66 @@
+/* Styles for the PatientsPage */
+
+.patients-container {
+  padding: 20px;
+}
+
+.patients-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.patients-header h1 {
+  font-size: 24px;
+}
+
+.patients-header button {
+  padding: 10px 15px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.patients-header button:hover {
+  background-color: #45a049;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+.actions button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #008cba;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  background-color: #007bb5;
+}
+
+.actions .delete-btn {
+  background-color: #f44336;
+}
+
+.actions .delete-btn:hover {
+  background-color: #da190b;
+}

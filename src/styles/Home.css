@@ -1,0 +1,32 @@
+.home-container {
+  text-align: center;
+}
+
+.home-header {
+  background-color: #007BFF; /* Cor azul dos botões */
+  color: white;
+  padding: 20px;
+}
+
+.tabs-container {
+  margin: 20px auto;
+}
+
+.tab {
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.tab.active {
+  background-color: #007BFF;
+  color: white;
+}
+
+.tab-content {
+  margin-top: 20px;
+}

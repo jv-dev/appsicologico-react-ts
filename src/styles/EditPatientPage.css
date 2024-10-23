@@ -1,0 +1,64 @@
+.edit-patient-container {
+  padding: 20px;
+}
+
+.edit-patient-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.edit-patient-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 0 auto;
+}
+
+.edit-patient-form label {
+  margin-bottom: 5px;
+}
+
+.edit-patient-form input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.edit-patient-form button {
+  padding: 10px;
+  background-color: #008cba;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-patient-form button:hover {
+  background-color: #007bb5;
+}
+
+.back-button {
+  background-color: #007BFF; /* Cor azul */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.back-button:active {
+  background-color: #004080;
+}
+
+.back-button:focus {
+  outline: none;
+}
