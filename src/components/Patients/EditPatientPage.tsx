@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../styles/EditPatientPage.css';
 import PatientService from '../../services/PatientService';
+import { toast } from 'react-toastify';
+import TextInputMask from '../textInputMask/textInputMask';
 
 interface Patient {
   name: string;
@@ -21,7 +23,6 @@ const EditPatientPage: React.FC = () => {
   useEffect(() => {
     const fetchPatient = async () => {
       try {
-        // Usando o service para buscar o paciente por ID
         const patientData = await PatientService.getPatientById(id!);
         setPatient(patientData);
         setLoading(false);
@@ -33,24 +34,29 @@ const EditPatientPage: React.FC = () => {
     fetchPatient();
   }, [id]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | { currentTarget: { name: string; value: string } }) => {
+    const { name, value } = e.currentTarget;
     setPatient({ ...patient!, [name]: value });
-  };
+  };  
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       await PatientService.updatePatient(id!.toString(), patient);
-      navigate('/home'); // Redireciona após atualizar
-    } catch (error) {
-      console.error('Erro ao atualizar paciente', error);
+      navigate('/home');
+    } catch (error: any) {
+      toast.error(error.message) 
     }
+  };
+
+  const handleBack = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(-1)
   };
 
   return (
     <div className="edit-patient-container">
-      <h1>Editar paciente</h1>
+      <h1 className='page-title'>Editar paciente</h1>
       {loading ? (
         <p>Carregando...</p>
       ) : error ? (
@@ -65,16 +71,16 @@ const EditPatientPage: React.FC = () => {
             <input type="email" name="email" value={patient.email} onChange={handleInputChange} />
 
             <label>CPF:</label>
-            <input type="text" name="cpf" value={patient.cpf} onChange={handleInputChange} />
+            <TextInputMask placeholder="000.000.0000-00" maskType="cpf" name="cpf" onChange={handleInputChange} value={patient.cpf}/>
+
+            <label>RG:</label>
+            <TextInputMask placeholder="99.999.999-X" maskType="rg" name="rg" onChange={handleInputChange} value={patient.rg}/>
 
             <label>Data de nascimento:</label>
             <input type="date" name="birth_date" value={patient.birth_date} onChange={handleInputChange} />
 
-            <label>RG:</label>
-            <input type="text" name="rg" value={patient.rg} onChange={handleInputChange} />
-
             <button type="submit">Salvar mudanças</button>
-            <button onClick={() => navigate(-1)} className="back-button">Voltar</button>
+            <button onClick={handleBack} className="back-button">Voltar</button>
           </form>
         )
       )}

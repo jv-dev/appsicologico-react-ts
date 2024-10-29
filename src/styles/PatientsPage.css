@@ -1,5 +1,3 @@
-/* Styles for the PatientsPage */
-
 .patients-container {
   padding: 20px;
 }
@@ -11,56 +9,110 @@
   margin-bottom: 20px;
 }
 
-.patients-header h1 {
-  font-size: 24px;
-}
-
-.patients-header button {
-  padding: 10px 15px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.patients-header button:hover {
-  background-color: #45a049;
-}
-
-table {
+.patients-table {
   width: 100%;
-  border-collapse: collapse;
-}
-
-table th, table td {
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
   padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
 }
 
-table th {
-  background-color: #f2f2f2;
+.patients-table th, .patients-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.patients-table th {
+  background-color: #007bff;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.patients-table tr {
+  transition: background-color 0.3s;
+}
+
+.patients-table tr:hover {
+  background-color: #f1f5ff;
+}
+
+.patients-table tr:last-child td {
+  border-bottom: none;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
 }
 
 .actions button {
-  padding: 5px 10px;
-  margin-right: 5px;
-  background-color: #008cba;
-  color: white;
+  padding: 6px 12px;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.2s;
 }
 
-.actions button:hover {
-  background-color: #007bb5;
+.actions .edit-btn {
+  background-color: #ffc107;
+}
+
+.actions .edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.actions .record-btn {
+  background-color: #28a745;
+}
+
+.actions .record-btn:hover {
+  background-color: #218838;
 }
 
 .actions .delete-btn {
-  background-color: #f44336;
+  background-color: #dc3545;
 }
 
 .actions .delete-btn:hover {
-  background-color: #da190b;
+  background-color: #c82333;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  padding: 8px 12px;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.pagination li a:hover {
+  background-color: #ddd;
+}
+
+.pagination .active a {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }

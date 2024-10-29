@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../api/api';
 
 const API_URL = 'http://localhost:5000';
 
@@ -7,22 +7,23 @@ const getToken = () => {
 };
 
 const PatientService = {
-  getAllPatients: async () => {
-    try {
-      const response = await axios.get(`${API_URL}/paciente/listar`, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      throw new Error('Erro ao buscar pacientes');
-    }
+  getAllPatients: async (page = 1, perPage = 10) => {
+    const token = getToken();
+    const response = await api.get(`/paciente/listar`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      params: {
+        page,
+        per_page: perPage,
+      },
+    });
+    return response.data;
   },
 
   getPatientById: async (id: string) => {
     try {
-      const response = await axios.get(`${API_URL}/paciente/buscar/${id}`, {
+      const response = await api.get(`/paciente/buscar/${id}`, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
@@ -35,33 +36,49 @@ const PatientService = {
 
   createPatient: async (patientData: any) => {
     try {
-      const response = await axios.post(`${API_URL}/paciente/criar`, patientData, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      throw new Error('Erro ao criar paciente');
+        const formData = new FormData();
+        
+        Object.keys(patientData).forEach((key) => {
+            formData.append(key, patientData[key]);
+        });
+
+        const response = await api.post(`/paciente/criar`, formData, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`,
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        return response.data;
+    } catch (error: any) {
+        if (error.response && error.response.data && error.response.data.msg) {
+            throw new Error(error.response.data.msg);
+        } else {
+            throw new Error('Erro ao criar paciente');
+        }
     }
   },
 
   updatePatient: async (id: string, patientData: any) => {
     try {
-      const response = await axios.put(`${API_URL}/paciente/${id}`, patientData, {
+      const response = await api.put(`/paciente/${id}`, patientData, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
       });
       return response.data;
-    } catch (error) {
-      throw new Error('Erro ao atualizar paciente');
+    } catch (error: any) {
+      if (error.response && error.response.data && error.response.data.msg) {
+        throw new Error(error.response.data.msg);
+      } else {
+        throw new Error('Erro ao criar paciente');
+      }
     }
   },
 
   deletePatient: async (id: string) => {
     try {
-      const response = await axios.delete(`${API_URL}/paciente/${id}`, {
+      const response = await api.delete(`/paciente/${id}`, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },

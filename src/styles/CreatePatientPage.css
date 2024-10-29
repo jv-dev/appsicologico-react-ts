@@ -1,3 +1,9 @@
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 .create-patient-container {
   padding: 20px;
 }
@@ -18,7 +24,7 @@
   margin-bottom: 5px;
 }
 
-.create-patient-form input {
+.create-patient-form input, .input {
   margin-bottom: 15px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -41,7 +47,7 @@
 
 .create-patient-form .back-button {
   padding: 10px;
-  background-color: #007BFF; /* Cor azul */
+  background-color: #007BFF;
   color: white;
   border: none;
   margin-top: 20px;
@@ -49,6 +55,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  justify-content: center;
 }
 
 .create-patient-form .back-button:hover {

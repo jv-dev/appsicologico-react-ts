@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import PatientsPage from '../Patients/PatientsPage'; // Supondo que a página de pacientes já exista
-import '../../styles/Home.css'
+import { useNavigate } from 'react-router-dom';
+import PatientsPage from '../Patients/PatientsPage';
+import '../../styles/Home.css';
+import EditPsychologistModal from './EditPsychologistModal';
 
 const Home: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('patients');
+  const navigate = useNavigate();
+  const [isModalOpen, setModalOpen] = useState(false);
 
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case 'patients':
-        return <PatientsPage />;
-      case 'reports':
-        return <div>Relatórios serão exibidos aqui</div>;
-      default:
-        return null;
-    }
+  const handleAddPatient = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate('/patients/create');
+  };
+
+  const handleLogout = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    localStorage.removeItem('authToken');
+    navigate('/login');
+  };
+
+  const handleEditPsychologist = () => {
+    setModalOpen(true);
   };
 
   return (
@@ -21,23 +28,21 @@ const Home: React.FC = () => {
       <header className="home-header">
         <h1>APPSICOLÓGICO</h1>
       </header>
-      <div className="tabs-container">
-        <button
-          className={`tab ${activeTab === 'patients' ? 'active' : ''}`}
-          onClick={() => setActiveTab('patients')}
-        >
-          Pacientes
+      <div className="button-container">
+        <button className="add-patient-button" onClick={handleAddPatient}>
+          Adicionar paciente
         </button>
-        <button
-          className={`tab ${activeTab === 'reports' ? 'active' : ''}`}
-          onClick={() => setActiveTab('reports')}
-        >
-          Relatórios
+        <button className="edit-psychologist-button" onClick={handleEditPsychologist}>
+          Editar Psicólogo
+        </button>
+        <button className="logout-button" onClick={handleLogout}>
+          Sair
         </button>
       </div>
       <div className="tab-content">
-        {renderTabContent()}
+        <PatientsPage />
       </div>
+      {isModalOpen && <EditPsychologistModal onClose={() => setModalOpen(false)} />}
     </div>
   );
 };

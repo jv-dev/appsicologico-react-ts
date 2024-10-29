@@ -8,7 +8,19 @@ const AuthService = {
   },
   register: async (psychologist: Psychologist): Promise<void> => {
     await AuthRepository.register(psychologist)
-  }
+  },
+  getPsychologistDetails: async (): Promise<Psychologist> => {
+    const psychologist = await AuthRepository.fetchPsychologistDetails();
+    return psychologist;
+  },
+  updatePsychologist: async (psychologist: any): Promise<void> => {
+    const sanitizedPsychologist = {
+      ...psychologist,
+      cpf: psychologist.cpf.replace(/[.\-/]/g, ''),
+    };
+
+    await AuthRepository.updatePsychologist(sanitizedPsychologist);
+  },
 }
 
 export default AuthService

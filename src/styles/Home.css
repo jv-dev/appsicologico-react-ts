@@ -3,13 +3,9 @@
 }
 
 .home-header {
-  background-color: #007BFF; /* Cor azul dos botões */
+  background-color: #007BFF;
   color: white;
   padding: 20px;
-}
-
-.tabs-container {
-  margin: 20px auto;
 }
 
 .tab {
@@ -28,5 +24,63 @@
 }
 
 .tab-content {
+  margin-top: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 20px;
+}
+
+.add-patient-button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-patient-button:hover {
+  background-color: #218838;
+}
+
+.edit-psychologist-button {
+  background-color: #ffc107;
+  color: black;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-psychologist-button:hover {
+  background-color: #e0a800;
+}
+
+.logout-button {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #e60000;
+}
+
+.patient-list-title {
+  text-align: center;
+  font-size: 1.5rem;
   margin-top: 20px;
 }
