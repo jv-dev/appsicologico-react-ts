@@ -36,16 +36,9 @@ const PatientService = {
 
   createPatient: async (patientData: any) => {
     try {
-        const formData = new FormData();
-        
-        Object.keys(patientData).forEach((key) => {
-            formData.append(key, patientData[key]);
-        });
-
-        const response = await api.post(`/paciente/criar`, formData, {
+        const response = await api.post(`/paciente/criar`, patientData, {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
-                'Content-Type': 'multipart/form-data',
             },
         });
 
@@ -84,8 +77,12 @@ const PatientService = {
         },
       });
       return response.data;
-    } catch (error) {
-      throw new Error('Erro ao deletar paciente');
+    } catch (error: any) {
+      if (error.response && error.response.data && error.response.data.msg) {
+        throw new Error(error.response.data.msg);
+      } else {
+        throw new Error('Erro ao apagar paciente');
+      }
     }
   },
 };

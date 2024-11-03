@@ -22,6 +22,23 @@ const ReportService = {
     link.click();
     window.URL.revokeObjectURL(downloadUrl);
   },
+  generateMedicalDeclaration: async (reportData: any) => {
+    const token = getToken();
+    const response = await api.post(`/relatorio/declaracao`, reportData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      responseType: 'blob',
+    });
+
+    const pdfBlob = new Blob([response.data], { type: 'application/pdf' });
+    const downloadUrl = window.URL.createObjectURL(pdfBlob);
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = 'declaracao.pdf';
+    link.click();
+    window.URL.revokeObjectURL(downloadUrl);
+  },
 };
 
 export default ReportService;
